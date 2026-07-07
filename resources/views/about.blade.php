@@ -1,42 +1,63 @@
 @extends('layouts.app')
 
 @section('content')
-    <!-- High-End Interactive 3D Avatar Section -->
-    <div style="display: flex; align-items: center; gap: 3rem; margin-bottom: 5rem; flex-wrap: wrap;">
+    <div style="display: flex; gap: 4rem; margin-bottom: 6rem; flex-wrap: wrap; align-items: flex-start;">
         
-        <!-- Spline 3D Viewer -->
-        <!-- Replace the URL in the 'url' attribute with your own custom Spline 3D character scene -->
-        <div style="width: 300px; height: 350px; border-radius: 20px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 10px 40px rgba(0, 229, 255, 0.15); background: var(--bg-panel); position: relative;">
-            <spline-viewer url="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode"></spline-viewer>
+        <!-- Dual Avatar Section -->
+        <div style="display: flex; flex-direction: column; gap: 2rem; min-width: 280px;">
+            <!-- Primary Real Photo -->
+            <div style="border: var(--border-thick); box-shadow: var(--shadow-brutal); background: var(--accent-red); padding: 1rem; transform: rotate(-2deg);">
+                <img src="https://avatars.githubusercontent.com/foustujian-sketch" alt="Real Photo" style="width: 100%; height: auto; border: var(--border-thick); display: block; filter: grayscale(100%) contrast(1.2);">
+                <div style="margin-top: 1rem; font-weight: 800; text-align: center; font-size: 1.2rem; background: #fff; border: var(--border-thick); padding: 0.5rem;">[ ROOT_USER ]</div>
+            </div>
+
+            <!-- Secondary Generated Avatar -->
+            <div style="border: var(--border-thick); box-shadow: var(--shadow-brutal); background: var(--accent-yellow); padding: 1rem; transform: rotate(3deg);">
+                <img src="/images/avatar-generated.png" alt="Generated Avatar" style="width: 100%; height: auto; border: var(--border-thick); display: block;">
+                <div style="margin-top: 1rem; font-weight: 800; text-align: center; font-size: 1.2rem; background: #fff; border: var(--border-thick); padding: 0.5rem;">[ VECTOR_SYNC ]</div>
+            </div>
         </div>
 
+        <!-- Bio Details -->
         <div style="flex: 1; min-width: 300px;">
-            <div style="display: inline-block; padding: 0.5rem 1rem; background: rgba(66, 165, 245, 0.1); border: 1px solid var(--accent-blue); color: var(--accent-cyan); border-radius: 20px; font-weight: 500; font-size: 0.9rem; width: fit-content; margin-bottom: 1rem; letter-spacing: 1px;">
-                DART &amp; FLUTTER SPECIALIST
+            <div style="display: inline-block; padding: 0.5rem 1rem; background: #fff; border: var(--border-thick); box-shadow: 4px 4px 0px #000; font-weight: 800; font-size: 1rem; margin-bottom: 2rem;">
+                SYSTEM.STATUS = ONLINE
             </div>
-            <h1 style="border-left: none; padding-left: 0;">Software Engineer</h1>
-            <p style="font-size: 1.25rem; max-width: 800px; color: var(--text-primary); line-height: 1.7;">
-                I engineer highly fluid, cross-platform applications and robust backend systems. Based in Indonesia, specializing in Dart, Flutter, Laravel, and scalable API architecture.
-            </p>
+            
+            <h1>Software Engineer</h1>
+            
+            <div class="card" style="margin-bottom: 2rem; background: var(--accent-yellow);">
+                <p style="font-size: 1.2rem; font-weight: 600; line-height: 1.6;">
+                    Backend Developer &amp; Information Systems Student. Specializing in Laravel, Flutter, and PostgreSQL. Building scalable web architectures, APIs, and brutalist terminal applications.
+                </p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <div class="card" style="padding: 1.5rem;">
+                    <div style="font-size: 0.9rem; color: #666; margin-bottom: 0.5rem; font-weight: 800;">LOCATION</div>
+                    <div style="font-weight: 800; font-size: 1.2rem; font-family: 'Space Grotesk', sans-serif;">Samarinda,<br>Indonesia</div>
+                </div>
+                <div class="card" style="padding: 1.5rem; background: var(--accent-red); color: #fff;">
+                    <div style="font-size: 0.9rem; margin-bottom: 0.5rem; font-weight: 800; color: #000;">EDUCATION</div>
+                    <div style="font-weight: 800; font-size: 1.2rem; font-family: 'Space Grotesk', sans-serif;">Universitas<br>Mulawarman</div>
+                    <div style="margin-top: 1rem; background: #000; color: #fff; padding: 0.2rem 0.5rem; display: inline-block; font-weight: bold; border: 2px solid #fff;">GPA: 3.98</div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <h2>Professional Experience</h2>
+    <h2>System.Experience</h2>
     <div style="display: flex; flex-direction: column; gap: 2rem;">
-        <div class="card" data-tilt>
-            <div class="card-inner">
-                <h3 style="color: var(--text-primary);">Relations & Sponsorship Committee</h3>
-                <p style="font-family: monospace; color: var(--accent-cyan); margin-bottom: 1rem;">INSEVENT 2025 &bull; Mar 2025 - Dec 2025</p>
-                <p>Served on the Public Relations and Sponsorship committee. Managed external communications, secured financial sponsorships, and established critical media partnerships.</p>
-            </div>
+        <div class="card">
+            <h3>Relations & Sponsorship Committee</h3>
+            <p style="font-weight: 800; color: var(--accent-red); margin-bottom: 1rem; border-bottom: 2px solid #000; padding-bottom: 0.5rem; display: inline-block;">INSEVENT 2025 (Mar 2025 - Dec 2025)</p>
+            <p style="font-size: 1.1rem; font-weight: 500;">Served on the Public Relations and Sponsorship committee. Managed external communications, secured financial sponsorships, and established critical media partnerships.</p>
         </div>
         
-        <div class="card" data-tilt>
-            <div class="card-inner">
-                <h3 style="color: var(--text-primary);">Advocacy & Student Welfare</h3>
-                <p style="font-family: monospace; color: var(--accent-cyan); margin-bottom: 1rem;">INFORSA &bull; Feb 2025 - Dec 2025</p>
-                <p>Acted as the primary liaison between the Information Systems student body and university administration, ensuring students' academic rights and welfare were heavily prioritized.</p>
-            </div>
+        <div class="card">
+            <h3>Advocacy & Student Welfare</h3>
+            <p style="font-weight: 800; color: var(--accent-red); margin-bottom: 1rem; border-bottom: 2px solid #000; padding-bottom: 0.5rem; display: inline-block;">INFORSA (Feb 2025 - Dec 2025)</p>
+            <p style="font-size: 1.1rem; font-weight: 500;">Acted as the primary liaison between the Information Systems student body and university administration, ensuring students' academic rights and welfare were heavily prioritized.</p>
         </div>
     </div>
 @endsection
