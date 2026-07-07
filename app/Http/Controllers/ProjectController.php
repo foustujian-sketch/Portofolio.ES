@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Cache;
 
 class ProjectController extends Controller
 {
-    public function index($theme)
+    public function index()
     {
         $projects = Cache::remember('github_projects', 86400, function () {
             $response = Http::withHeaders([
@@ -25,10 +25,6 @@ class ProjectController extends Controller
             return [];
         });
 
-        if ($theme === 'clean') {
-            return view('clean.projects', ['projects' => $projects]);
-        }
-        
-        return view('creative.projects', ['projects' => $projects]);
+        return view('projects', ['projects' => $projects]);
     }
 }

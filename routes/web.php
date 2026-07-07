@@ -4,19 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('about');
 });
 
-// Clean Theme Routes
-Route::prefix('clean')->group(function () {
-    Route::get('/', function () { return view('clean.about'); });
-    Route::get('/projects', [ProjectController::class, 'index'])->defaults('theme', 'clean');
-    Route::get('/certificates', function () { return view('clean.certificates'); });
-});
+Route::get('/projects', [ProjectController::class, 'index']);
 
-// Creative Theme Routes
-Route::prefix('creative')->group(function () {
-    Route::get('/', function () { return view('creative.about'); });
-    Route::get('/projects', [ProjectController::class, 'index'])->defaults('theme', 'creative');
-    Route::get('/certificates', function () { return view('creative.certificates'); });
+Route::get('/certificates', function () {
+    return view('certificates');
 });
