@@ -1,9 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <div style="max-width: 800px; margin-bottom: 4rem;">
-        <h1>Software Engineer</h1>
-        <p style="font-size: 1.25rem; color: var(--text-primary);">I engineer robust web architectures and intelligent systems. Based in Indonesia, specializing in Laravel, PostgreSQL, and scalable API design.</p>
+    <div style="display: flex; align-items: center; gap: 2.5rem; margin-bottom: 4rem; flex-wrap: wrap;">
+        <img src="https://avatars.githubusercontent.com/foustujian-sketch" alt="Abdurrahman Al Farisy" style="width: 140px; height: 140px; border-radius: 50%; border: 4px solid var(--accent-blue); box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
+        <div style="flex: 1; min-width: 300px;">
+            <h1 style="margin-bottom: 0.5rem; border-left: none; padding-left: 0;">Software Engineer</h1>
+            <p style="font-size: 1.25rem; color: var(--text-primary);">I engineer robust web architectures and intelligent systems. Based in Indonesia, specializing in Laravel, PostgreSQL, and scalable API design.</p>
+        </div>
     </div>
 
     <h2>Recent Activity</h2>
