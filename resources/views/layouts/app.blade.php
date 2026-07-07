@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abdurrahman Al Farisy | Portfolio</title>
+    <title>Abdurrahman Al Farisy</title>
     
-    <!-- Premium Fonts for Neobrutalism -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Space Grotesk for chunky headers, JetBrains Mono for data/body -->
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Inter for display/body, IBM Plex Mono for utility -->
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
     
     <!-- Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -17,175 +16,166 @@
 
     <style>
         :root {
-            --bg-base: #F4F0E6; /* Raw Paper Beige */
-            --border-main: #000000;
-            --text-primary: #000000;
-            --accent-yellow: #FFB800; /* Mustard Yellow from Jacket */
-            --accent-red: #FF3333; /* Red from photo background */
-            --accent-cyan: #00E5FF; 
-            
-            --border-thick: 4px solid var(--border-main);
-            --shadow-brutal: 8px 8px 0px var(--border-main);
-            --shadow-brutal-hover: 4px 4px 0px var(--border-main);
+            --bg-base: #FFFFFF;
+            --text-primary: #111111;
+            --accent-blue: #0000FF;
+            --text-muted: #888888;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
-            font-family: 'JetBrains Mono', monospace; 
+            font-family: 'Inter', sans-serif; 
             background-color: var(--bg-base); 
             color: var(--text-primary); 
             overflow-x: hidden;
-            line-height: 1.6;
-            background-image: 
-                linear-gradient(var(--border-main) 1px, transparent 1px),
-                linear-gradient(90deg, var(--border-main) 1px, transparent 1px);
-            background-size: 100px 100px; /* Big raw grid */
-            background-position: -1px -1px;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Top Navigation */
+        /* Strict Grid Structure */
+        .site-grid {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Navigation */
         nav { 
-            padding: 1.5rem 4vw; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
-            position: fixed; 
-            top: 0; 
-            width: 100%; 
-            z-index: 100;
-            background: var(--bg-base);
-            border-bottom: var(--border-thick);
+            padding: 4rem 2rem;
+            position: fixed;
+            width: 250px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
-        
+
         .logo { 
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700; 
-            font-size: 1.8rem; 
+            font-weight: 900; 
+            font-size: 1.2rem; 
             text-decoration: none; 
             color: var(--text-primary); 
+            letter-spacing: -0.05em;
             text-transform: uppercase;
-            letter-spacing: -1px;
-            background: var(--accent-yellow);
-            padding: 0.2rem 1rem;
-            border: var(--border-thick);
-            box-shadow: 4px 4px 0px #000;
         }
 
-        .nav-links { display: flex; gap: 1rem; }
+        .nav-links { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 1rem; 
+        }
+        
         .nav-links a { 
-            color: var(--text-primary); 
+            color: var(--text-muted); 
             text-decoration: none; 
-            font-weight: 800; 
-            font-size: 1rem; 
+            font-weight: 400; 
+            font-size: 1.1rem; 
+            letter-spacing: -0.03em;
+            transition: color 0s; /* No smooth fades, instant feedback */
+        }
+        
+        .nav-links a:hover { color: var(--text-primary); }
+        .nav-links a.active { color: var(--accent-blue); font-weight: 700; }
+
+        .nav-footer {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
             text-transform: uppercase;
-            padding: 0.6rem 1.2rem;
-            border: var(--border-thick);
-            background: #fff;
-            box-shadow: var(--shadow-brutal);
-            transition: all 0.1s ease-out;
-        }
-        
-        .nav-links a:hover, .nav-links a.active { 
-            transform: translate(4px, 4px);
-            box-shadow: var(--shadow-brutal-hover);
-        }
-        
-        .nav-links a.active {
-            background: var(--accent-red);
-            color: #fff;
         }
 
-        .page-wrapper { 
-            min-height: 100vh; padding: 10rem 4vw 5rem 4vw; max-width: 1200px; margin: 0 auto;
+        /* Main Content Area */
+        main {
+            grid-column: 2;
+            padding: 4rem 4rem 8rem 4rem;
+            max-width: 1200px;
         }
         
         h1 { 
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(3.5rem, 8vw, 6rem); 
-            font-weight: 700; 
-            line-height: 1; 
-            margin-bottom: 2rem; 
+            font-size: clamp(4rem, 8vw, 8rem); 
+            font-weight: 900; 
+            line-height: 0.9; 
+            letter-spacing: -0.06em;
+            margin-bottom: 4rem; 
             text-transform: uppercase;
-            letter-spacing: -2px;
         }
         
         h2 { 
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.5rem; 
+            font-size: 1.5rem; 
             font-weight: 700; 
+            letter-spacing: -0.04em;
             margin-bottom: 2rem; 
             text-transform: uppercase;
-            background: #fff;
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            border: var(--border-thick);
-            box-shadow: 4px 4px 0px #000;
+            color: var(--accent-blue);
         }
 
-        /* Neobrutalist Cards */
-        .card { 
-            background: #fff;
-            border: var(--border-thick); 
-            padding: 2rem; 
-            box-shadow: var(--shadow-brutal);
-            transition: all 0.1s ease-out;
-            position: relative;
-        }
-        
-        .card:hover { 
-            transform: translate(4px, 4px);
-            box-shadow: var(--shadow-brutal-hover);
+        p { 
+            font-weight: 300; 
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin-bottom: 1.5rem;
         }
 
-        .card h3 { 
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.8rem; 
-            font-weight: 700; 
-            margin-bottom: 1rem; 
+        /* Utility/Data Classes */
+        .mono-data {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.85rem;
             text-transform: uppercase;
+            color: var(--text-muted);
         }
 
-        /* Sweep Transition Layer */
+        /* Transition Layer (Ultra Minimalist) */
         .transition-sweep { 
-            position: fixed; inset: 0; background: var(--border-main); 
-            transform: scaleY(0); transform-origin: top; 
+            position: fixed; inset: 0; background: var(--accent-blue); 
+            transform: scaleX(0); transform-origin: left; 
             z-index: 9999; pointer-events: none; 
         }
-        
-        .grid-layout { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 3rem; }
+
+        /* Responsive Grid */
+        @media (max-width: 768px) {
+            .site-grid { grid-template-columns: 1fr; }
+            nav { position: relative; width: 100%; height: auto; padding: 2rem; border-bottom: 1px solid #eee; }
+            main { grid-column: 1; padding: 2rem; }
+        }
     </style>
 </head>
 <body data-barba="wrapper">
     <div class="transition-sweep"></div>
     
-    <nav>
-        <a href="/" class="logo">AL_FARISY</a>
-        <div class="nav-links">
-            <a href="/" class="{{ request()->is('/') ? 'active' : '' }}">INFO</a>
-            <a href="/projects" class="{{ request()->is('projects') ? 'active' : '' }}">BUILD</a>
-            <a href="/certificates" class="{{ request()->is('certificates') ? 'active' : '' }}">CERTS</a>
-        </div>
-    </nav>
-    
-    <main data-barba="container" data-barba-namespace="{{ request()->path() }}">
-        <div class="page-wrapper">
+    <div class="site-grid">
+        <nav>
+            <div>
+                <a href="/" class="logo">Al Farisy</a>
+                <div class="nav-links" style="margin-top: 4rem;">
+                    <a href="/" class="{{ request()->is('/') ? 'active' : '' }}">Profile</a>
+                    <a href="/projects" class="{{ request()->is('projects') ? 'active' : '' }}">Architecture</a>
+                    <a href="/certificates" class="{{ request()->is('certificates') ? 'active' : '' }}">Credentials</a>
+                </div>
+            </div>
+            <div class="nav-footer">
+                SYS.V.2.0<br>
+                SAMARINDA, ID
+            </div>
+        </nav>
+        
+        <main data-barba="container" data-barba-namespace="{{ request()->path() }}">
             @yield('content')
-        </div>
-    </main>
+        </main>
+    </div>
 
     <script>
-        // Brutalist Barba Transitions (Hard snaps)
+        // Minimalist Barba Transition (Sharp Blue Cut)
         barba.init({
             transitions: [{
-                name: 'brutal-transition',
+                name: 'sharp-cut',
                 async leave(data) {
                     const done = this.async();
                     
-                    // Slam down the black screen
+                    // Instant sharp sweep across the screen
                     await gsap.fromTo('.transition-sweep', 
-                        { scaleY: 0, transformOrigin: 'top' },
-                        { scaleY: 1, duration: 0.3, ease: 'power4.in' }
+                        { scaleX: 0, transformOrigin: 'left' },
+                        { scaleX: 1, duration: 0.3, ease: 'expo.inOut' }
                     );
                     
                     done();
@@ -201,11 +191,16 @@
                         }
                     });
 
-                    // Snap open
+                    // Instantly disappear to the right
                     gsap.fromTo('.transition-sweep', 
-                        { scaleY: 1, transformOrigin: 'bottom' },
-                        { scaleY: 0, duration: 0.4, ease: 'power4.out', delay: 0.1 }
+                        { scaleX: 1, transformOrigin: 'right' },
+                        { scaleX: 0, duration: 0.3, ease: 'expo.inOut' }
                     );
+                    
+                    // Simple stark fade in for content
+                    return gsap.from(data.next.container, {
+                        opacity: 0, duration: 0.4, delay: 0.1
+                    });
                 }
             }]
         });
