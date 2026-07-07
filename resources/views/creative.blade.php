@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abdurrahman Al-Farisy | Creative Portfolio</title>
+    <title>Abdurrahman Al Farisy | Creative Portfolio</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap');
@@ -20,9 +20,10 @@
         .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 0 5vw; position: relative; }
         .title-wrapper { overflow: hidden; }
         h1 { font-size: clamp(3rem, 8vw, 10rem); font-weight: 700; line-height: 1; text-transform: uppercase; margin-bottom: 1rem; }
-        .hero p { font-size: clamp(1rem, 2vw, 2rem); max-width: 600px; font-weight: 300; opacity: 0.8; }
+        .hero p { font-size: clamp(1rem, 2vw, 1.5rem); max-width: 700px; font-weight: 300; opacity: 0.8; margin-top: 1rem; line-height: 1.5;}
+        .contact { font-size: 1rem; opacity: 0.6; margin-top: 1rem;}
         
-        .projects-marquee { margin-top: 5rem; white-space: nowrap; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); padding: 2rem 0; }
+        .projects-marquee { margin-top: 2rem; white-space: nowrap; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); padding: 2rem 0; }
         .marquee-inner { display: inline-block; font-size: 4rem; font-weight: 700; text-transform: uppercase; padding-left: 2rem; color: transparent; -webkit-text-stroke: 1px var(--text); }
         .marquee-inner span { margin-right: 2rem; transition: color 0.3s; cursor: pointer; }
         .marquee-inner span:hover { color: var(--accent); -webkit-text-stroke: 0px; }
@@ -41,16 +42,24 @@
     
     <section class="hero">
         <div class="title-wrapper"><h1 class="reveal-text">Abdurrahman</h1></div>
-        <div class="title-wrapper"><h1 class="reveal-text">Al-Farisy</h1></div>
-        <div class="title-wrapper"><p class="reveal-text" style="color: var(--accent);">Full Stack Developer & Digital Creator.</p></div>
+        <div class="title-wrapper"><h1 class="reveal-text">Al Farisy</h1></div>
+        <div class="title-wrapper"><p class="reveal-text" style="color: var(--accent);">Backend Developer & System Analyst.</p></div>
+        <div class="title-wrapper">
+            <p class="reveal-text">Information Systems student focused on system analysis, API integration, and relational schema design. Experienced with Laravel, Flutter, PostgreSQL, and Supabase.</p>
+        </div>
+        <div class="title-wrapper">
+            <p class="reveal-text contact">foustujian@gmail.com &mdash; Samarinda, Indonesia</p>
+        </div>
     </section>
     
     <div class="projects-marquee">
         <div class="marquee-inner" id="marquee">
-            <span>E-Commerce Platform</span> &bull; 
-            <span>Analytics Dashboard</span> &bull; 
-            <span>Mobile App API</span> &bull; 
-            <span>Interactive WebGL</span> &bull;
+            <span>Laravel Architecture</span> &bull; 
+            <span>System Automation</span> &bull; 
+            <span>Flutter Apps</span> &bull; 
+            <span>API Integration</span> &bull;
+            <span>PostgreSQL</span> &bull; 
+            <span>Supabase</span> &bull;
         </div>
     </div>
     
