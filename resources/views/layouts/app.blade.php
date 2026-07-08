@@ -3,276 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abdurrahman Al Farisy</title>
-    <meta name="description" content="Software Engineer specializing in Laravel, PostgreSQL, and Flutter.">
+    <title>Abdurrahman Al Farisy - Backend Developer</title>
+    <meta name="description" content="Portfolio of Abdurrahman Al Farisy, an Information Systems student building Laravel APIs, PostgreSQL schemas, and Flutter apps.">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://unpkg.com/@barba/core"></script>
-    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.82/build/spline-viewer.js"></script>
+    @vite(['resources/js/app.js'])
 
     <style>
-        /* =============================================
-           0. RESET & BASE
-           ============================================= */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-        html, body {
-            height: 100%;
-            overflow: hidden;
+        :root {
+            --bg: #070807;
+            --panel: rgba(16, 18, 16, 0.78);
+            --panel-strong: rgba(22, 25, 22, 0.92);
+            --line: rgba(238, 247, 233, 0.12);
+            --line-strong: rgba(238, 247, 233, 0.22);
+            --text: #f3f7ef;
+            --muted: #a7b0a1;
+            --soft: #d6dece;
+            --mint: #7ee0b2;
+            --amber: #f0b85a;
+            --coral: #ff8066;
+            --blue: #7fb4ff;
+            --violet: #b99cff;
+            --radius: 8px;
         }
 
+        html { min-height: 100%; background: var(--bg); }
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            color: #e4e4e7;
-            background: #050505;
+            min-height: 100vh;
+            font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            color: var(--text);
+            background:
+                linear-gradient(rgba(126, 224, 178, 0.045) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(126, 224, 178, 0.04) 1px, transparent 1px),
+                radial-gradient(circle at 18% 12%, rgba(240, 184, 90, 0.16), transparent 24rem),
+                radial-gradient(circle at 84% 16%, rgba(127, 180, 255, 0.14), transparent 26rem),
+                linear-gradient(145deg, #070807 0%, #11140f 52%, #080a08 100%);
+            background-size: 44px 44px, 44px 44px, auto, auto, auto;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        /* =============================================
-           1. THE ANIMATED GRADIENT (visible frame)
-           ============================================= */
-        .gradient-frame {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            background: linear-gradient(230deg, #a24bcf, #4b79cf, #4bc5cf, #a24bcf);
-            background-size: 600% 600%;
-            animation: gradient-shift 8s ease infinite;
-        }
-
-        @keyframes gradient-shift {
-            0%   { background-position: 0% 50% }
-            50%  { background-position: 100% 50% }
-            100% { background-position: 0% 50% }
-        }
-
-        /* Noise texture overlay on gradient for depth */
-        .gradient-frame::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-            opacity: 0.3;
-            pointer-events: none;
-        }
-
-        /* =============================================
-           2. THE SCALING CARD (the main viewport card)
-           ============================================= */
-        .scaling-card {
-            position: fixed;
-            inset: 0;
-            z-index: 10;
-            background: #0a0a0a;
-            border-radius: 24px;
-            overflow-y: auto;
             overflow-x: hidden;
-            scrollbar-width: thin;
-            scrollbar-color: #333 transparent;
-
-            /* THE transition — starts scaled down, showing gradient frame */
-            transform: scale(0.88);
-            transform-origin: center center;
-            transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-                        border-radius 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: transform;
         }
 
-        .scaling-card::-webkit-scrollbar { width: 6px; }
-        .scaling-card::-webkit-scrollbar-track { background: transparent; }
-        .scaling-card::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
-
-        /* When open — fills viewport */
-        body.is-open .scaling-card {
-            transform: scale(1);
-            border-radius: 0;
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background: linear-gradient(90deg, rgba(255,255,255,0.06), transparent 18%, transparent 82%, rgba(255,255,255,0.04));
+            opacity: 0.45;
+            z-index: 0;
         }
 
-        /* =============================================
-           3. NAVIGATION
-           ============================================= */
-        .site-nav {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1.25rem 3rem;
-            background: rgba(10, 10, 10, 0.85);
-            backdrop-filter: blur(20px) saturate(1.5);
-            -webkit-backdrop-filter: blur(20px) saturate(1.5);
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-        }
+        a { color: inherit; }
+        img { max-width: 100%; }
 
-        .nav-brand {
-            font-weight: 700;
-            font-size: 1rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .nav-links { display: flex; gap: 0.25rem; }
-
-        .nav-links a {
-            color: #71717a;
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            transition: color 0.2s, background 0.2s;
-        }
-
-        .nav-links a:hover { color: #e4e4e7; background: rgba(255,255,255,0.05); }
-        .nav-links a.active { color: #fff; background: rgba(255,255,255,0.08); }
-
-        /* =============================================
-           4. CONTENT AREA
-           ============================================= */
-        .page-content {
-            padding: 3rem;
-            max-width: 1000px;
+        .site-shell {
+            position: relative;
+            z-index: 1;
+            width: min(1180px, calc(100% - 40px));
             margin: 0 auto;
         }
 
-        /* =============================================
-           5. INNER CARDS (with 3D parallax)
-           ============================================= */
-        .inner-card {
-            background: #111;
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 16px;
-            padding: 2rem;
-            transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.15s ease-out;
-            transform-style: preserve-3d;
-            will-change: transform;
-            cursor: default;
+        .site-nav {
+            position: sticky;
+            top: 16px;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            min-height: 64px;
+            margin: 16px 0 28px;
+            padding: 0.75rem;
+            background: rgba(7, 8, 7, 0.78);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            backdrop-filter: blur(18px);
         }
 
-        .inner-card:hover {
-            border-color: rgba(255,255,255,0.12);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.08);
+        .nav-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            font-weight: 800;
+            letter-spacing: 0;
         }
 
-        .inner-card .card-content {
-            transform: translateZ(40px);
-            transition: transform 0.15s ease-out;
+        .brand-mark {
+            display: grid;
+            place-items: center;
+            width: 38px;
+            height: 38px;
+            border-radius: var(--radius);
+            color: #06100b;
+            background: linear-gradient(135deg, var(--mint), var(--amber));
+            font-family: "JetBrains Mono", monospace;
+            font-weight: 600;
         }
 
-        /* =============================================
-           6. TYPOGRAPHY
-           ============================================= */
+        .nav-links { display: flex; gap: 0.25rem; }
+        .nav-links a {
+            min-height: 38px;
+            display: inline-flex;
+            align-items: center;
+            padding: 0 0.9rem;
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 700;
+            border-radius: var(--radius);
+            transition: color 0.2s ease, background 0.2s ease;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--text); background: rgba(255,255,255,0.08); }
+
+        .page-content { padding-bottom: 4rem; }
+        .reveal {
+            opacity: 1;
+            transform: translateY(0);
+            animation: reveal-up 0.72s ease both;
+        }
+        .reveal:nth-child(2) { animation-delay: 0.08s; }
+        .reveal:nth-child(3) { animation-delay: 0.14s; }
+        @keyframes reveal-up {
+            from { opacity: 0; transform: translateY(18px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(340px, 0.84fr);
+            gap: clamp(1.5rem, 4vw, 4rem);
+            align-items: center;
+            min-height: calc(100vh - 132px);
+            padding-bottom: 2rem;
+        }
+
+        .eyebrow, .font-mono {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.76rem;
+            letter-spacing: 0;
+        }
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            color: var(--mint);
+            margin-bottom: 1.15rem;
+        }
+        .eyebrow::before {
+            content: "";
+            width: 30px;
+            height: 2px;
+            background: var(--mint);
+        }
+
         .heading-xl {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            max-width: 720px;
+            color: var(--text);
+            font-size: clamp(3rem, 7vw, 6.7rem);
+            line-height: 0.92;
             font-weight: 900;
-            letter-spacing: -0.03em;
-            line-height: 1.05;
-            color: #fff;
+            letter-spacing: 0;
         }
 
         .heading-gradient {
-            background: linear-gradient(135deg, #c084fc, #60a5fa, #34d399);
+            color: transparent;
+            background: linear-gradient(105deg, var(--mint), var(--amber) 48%, var(--coral));
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .heading-md {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #fff;
-            letter-spacing: -0.01em;
+            color: var(--text);
+            font-size: 1.08rem;
+            line-height: 1.25;
+            font-weight: 800;
+            letter-spacing: 0;
         }
 
-        .text-muted { color: #71717a; }
-        .text-sm { font-size: 0.875rem; }
+        .lead {
+            max-width: 620px;
+            margin-top: 1.4rem;
+            color: var(--soft);
+            font-size: 1.03rem;
+            line-height: 1.75;
+        }
+
+        .text-muted { color: var(--muted); }
+        .text-sm { font-size: 0.9rem; }
         .text-xs { font-size: 0.75rem; }
 
-        .font-mono { font-family: 'JetBrains Mono', monospace; }
-
-        /* =============================================
-           7. PILLS / TAGS
-           ============================================= */
-        .pill {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 999px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            background: rgba(255,255,255,0.06);
-            color: #a1a1aa;
-            border: 1px solid rgba(255,255,255,0.08);
-        }
-
-        /* =============================================
-           8. BUTTONS
-           ============================================= */
-        .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.65rem 1.5rem;
-            border-radius: 10px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-decoration: none;
-            color: #0a0a0a;
-            background: #fff;
-            border: none;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 8px 25px rgba(255,255,255,0.15);
-        }
-
-        .btn-ghost {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.65rem 1.5rem;
-            border-radius: 10px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            text-decoration: none;
-            color: #e4e4e7;
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.1);
-            cursor: pointer;
-            transition: transform 0.2s, border-color 0.2s, background 0.2s;
-        }
-
-        .btn-ghost:hover {
-            transform: translateY(-1px);
-            border-color: rgba(255,255,255,0.25);
-            background: rgba(255,255,255,0.04);
-        }
-
-        /* =============================================
-           9. GRID
-           ============================================= */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.25rem;
-        }
-
-        .grid-span-full { grid-column: 1 / -1; }
-
-        /* =============================================
-           10. UTILITIES
-           ============================================= */
-        .flex { display: flex; }
+        .action-row, .flex { display: flex; }
         .flex-col { flex-direction: column; }
         .items-center { align-items: center; }
         .gap-1 { gap: 0.5rem; }
@@ -283,75 +204,65 @@
         .mt-2 { margin-top: 1rem; }
         .mt-3 { margin-top: 1.5rem; }
         .mt-4 { margin-top: 2rem; }
-        .mb-2 { margin-top: 1rem; }
 
-        .divider {
-            height: 1px;
-            background: rgba(255,255,255,0.06);
-            margin: 2rem 0;
-        }
+        .action-row { gap: 0.8rem; flex-wrap: wrap; margin-top: 1.7rem; }
 
-        /* Stagger animation targets — hidden by default */
-        .reveal { opacity: 0; transform: translateY(20px); }
-
-        /* =============================================
-           11. TRANSITION OVERLAY (for page switches)
-           ============================================= */
-        .transition-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            pointer-events: none;
-        }
-
-        .transition-overlay .slice {
-            position: absolute;
-            width: 100%;
-            height: 20%;
-            background: #0a0a0a;
-            transform: scaleX(0);
-            transform-origin: left;
-        }
-        .transition-overlay .slice:nth-child(1) { top: 0%; }
-        .transition-overlay .slice:nth-child(2) { top: 20%; }
-        .transition-overlay .slice:nth-child(3) { top: 40%; }
-        .transition-overlay .slice:nth-child(4) { top: 60%; }
-        .transition-overlay .slice:nth-child(5) { top: 80%; }
-
-        /* =============================================
-           12. 3D AVATAR HERO
-           ============================================= */
-        .avatar-hero {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+        .btn-primary, .btn-ghost {
+            min-height: 44px;
+            display: inline-flex;
             align-items: center;
-            gap: 2rem;
-            min-height: 420px;
-            margin-bottom: 2rem;
+            gap: 0.55rem;
+            padding: 0 1rem;
+            border-radius: var(--radius);
+            font-size: 0.88rem;
+            font-weight: 800;
+            text-decoration: none;
+            border: 1px solid transparent;
+            transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
         }
-
-        .avatar-hero-text {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
+        .btn-primary { color: #06100b; background: var(--mint); }
+        .btn-ghost { color: var(--text); background: rgba(255,255,255,0.04); border-color: var(--line); }
+        .btn-primary:hover, .btn-ghost:hover { transform: translateY(-2px); }
+        .btn-ghost:hover { border-color: var(--line-strong); background: rgba(255,255,255,0.08); }
 
         .avatar-3d-container {
             position: relative;
-            width: 100%;
-            height: 400px;
-            border-radius: 20px;
+            min-height: 560px;
+            height: min(68vh, 680px);
             overflow: hidden;
-            background: radial-gradient(ellipse at center, rgba(162, 75, 207, 0.15) 0%, transparent 70%);
+            border-radius: var(--radius);
+            border: 1px solid var(--line);
+            background:
+                radial-gradient(circle at 50% 18%, rgba(126, 224, 178, 0.20), transparent 18rem),
+                linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
         }
-
-        .avatar-3d-container spline-viewer {
+        .avatar-3d-container::before {
+            content: "";
+            position: absolute;
+            inset: 12px;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: var(--radius);
+            pointer-events: none;
+            z-index: 2;
+        }
+        .avatar-3d-container::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 34%;
+            background: linear-gradient(180deg, transparent 0%, rgba(13, 17, 14, 0.88) 42%, rgba(13, 17, 14, 0.98) 100%);
+            pointer-events: none;
+            z-index: 2;
+        }
+        .avatar-3d-container canvas {
+            position: relative;
+            z-index: 1;
             width: 100%;
             height: 100%;
-            border: none;
-            --logo-color: transparent; /* hide spline logo */
+            display: block;
         }
-
         .avatar-3d-fallback {
             position: absolute;
             inset: 0;
@@ -360,58 +271,90 @@
             justify-content: center;
             flex-direction: column;
             gap: 1rem;
-            z-index: -1;
+            color: var(--muted);
         }
-
         .avatar-3d-fallback img {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
+            width: 128px;
+            height: 128px;
+            border-radius: var(--radius);
             object-fit: cover;
-            border: 3px solid rgba(255,255,255,0.1);
-            box-shadow: 0 0 60px rgba(162, 75, 207, 0.3);
+            border: 1px solid var(--line);
         }
 
-        /* =============================================
-           13. RESPONSIVE
-           ============================================= */
-        @media (max-width: 768px) {
-            .site-nav { padding: 1rem 1.5rem; }
-            .page-content { padding: 2rem 1.5rem; }
-            .scaling-card { transform: scale(0.92); border-radius: 16px; }
-            .inner-card { padding: 1.5rem; }
-            .avatar-hero {
-                grid-template-columns: 1fr;
-                min-height: auto;
-            }
-            .avatar-3d-container { height: 300px; }
+        .status-strip {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1px;
+            margin-top: 1.5rem;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: var(--line);
+        }
+        .status-strip div { padding: 1rem; background: rgba(10, 12, 10, 0.86); }
+        .status-strip strong { display: block; color: var(--text); font-size: 1.3rem; }
+        .status-strip span { color: var(--muted); font-size: 0.78rem; }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+        }
+        .grid-span-full { grid-column: 1 / -1; }
+
+        .inner-card {
+            position: relative;
+            min-height: 180px;
+            padding: 1.35rem;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--panel);
+            backdrop-filter: blur(18px);
+            transform-style: preserve-3d;
+            transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+        }
+        .inner-card:hover { border-color: var(--line-strong); background: var(--panel-strong); }
+        .inner-card .card-content { transform: translateZ(34px); }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            min-height: 26px;
+            padding: 0 0.65rem;
+            border-radius: var(--radius);
+            color: var(--soft);
+            background: rgba(255,255,255,0.07);
+            border: 1px solid var(--line);
+            font-size: 0.74rem;
+            font-weight: 800;
         }
 
-        @media (max-width: 480px) {
-            .nav-links a { padding: 0.4rem 0.6rem; font-size: 0.8rem; }
-            .avatar-3d-container { height: 250px; }
+        .divider { height: 1px; margin: 2rem 0; background: var(--line); }
+
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; min-height: auto; }
+            .avatar-3d-container { min-height: 460px; height: 58vh; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .status-strip { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 640px) {
+            .site-shell { width: min(100% - 24px, 1180px); }
+            .site-nav { top: 8px; align-items: flex-start; flex-direction: column; }
+            .nav-links { width: 100%; }
+            .nav-links a { flex: 1; justify-content: center; padding: 0 0.5rem; }
+            .heading-xl { font-size: clamp(2.8rem, 18vw, 4.2rem); }
+            .avatar-3d-container { min-height: 390px; height: 54vh; }
+            .inner-card { padding: 1.1rem; }
         }
     </style>
 </head>
-<body data-barba="wrapper">
-
-    <!-- The gradient frame visible when card is scaled down -->
-    <div class="gradient-frame"></div>
-
-    <!-- Transition overlay (horizontal slices) -->
-    <div class="transition-overlay">
-        <div class="slice"></div>
-        <div class="slice"></div>
-        <div class="slice"></div>
-        <div class="slice"></div>
-        <div class="slice"></div>
-    </div>
-
-    <!-- THE scaling card -->
-    <div class="scaling-card" id="scalingCard">
-
+<body>
+    <div class="site-shell">
         <nav class="site-nav">
-            <a href="/" class="nav-brand">Al Farisy</a>
+            <a href="/" class="nav-brand">
+                <span class="brand-mark">AF</span>
+                <span>Abdurrahman Al Farisy</span>
+            </a>
             <div class="nav-links">
                 <a href="/" class="{{ request()->is('/') ? 'active' : '' }}">Profile</a>
                 <a href="/projects" class="{{ request()->is('projects') ? 'active' : '' }}">Projects</a>
@@ -419,184 +362,33 @@
             </div>
         </nav>
 
-        <main data-barba="container" data-barba-namespace="{{ request()->path() }}">
-            <div class="page-content">
-                @yield('content')
-            </div>
+        <main class="page-content">
+            @yield('content')
         </main>
-
     </div>
 
     <script>
     (function() {
-        const EASE_OUT = 'power4.out';
-        const EASE_IN_OUT = 'power2.inOut';
-
-        // ========================================
-        // Initial Load — scale the card up
-        // ========================================
-        window.addEventListener('DOMContentLoaded', () => {
-            // Small delay so the gradient frame is visible first
-            gsap.to({}, {
-                duration: 0.3,
-                onComplete: () => {
-                    document.body.classList.add('is-open');
-                    // Stagger reveal all .reveal elements
-                    revealContent();
-                    // Init parallax on inner cards
-                    initParallax();
-                }
-            });
-        });
-
-        // ========================================
-        // Content Reveal (GSAP stagger)
-        // ========================================
-        function revealContent() {
-            const els = document.querySelectorAll('.reveal');
-            if (els.length === 0) return;
-
-            gsap.fromTo(els,
-                { opacity: 0, y: 30 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.7,
-                    stagger: 0.08,
-                    ease: EASE_OUT,
-                    delay: 0.2
-                }
-            );
-        }
-
-        // ========================================
-        // 3D Parallax (ONLY on .inner-card)
-        // ========================================
         function initParallax() {
-            document.querySelectorAll('.inner-card').forEach(card => {
+            document.querySelectorAll('.inner-card').forEach((card) => {
+                if (card.dataset.parallaxReady) return;
+                card.dataset.parallaxReady = 'true';
                 card.addEventListener('mousemove', function(e) {
                     const rect = this.getBoundingClientRect();
-                    const halfW = rect.width / 2;
-                    const halfH = rect.height / 2;
-                    const coorX = halfW - (e.clientX - rect.left);
-                    const coorY = halfH - (e.clientY - rect.top);
-                    const degX = ((coorY / halfH) * 6) + 'deg';
-                    const degY = ((coorX / halfW) * -6) + 'deg';
-
-                    gsap.to(this, {
-                        rotateX: degX,
-                        rotateY: degY,
-                        transformPerspective: 1200,
-                        duration: 0.3,
-                        ease: 'power1.out'
-                    });
-
-                    const content = this.querySelector('.card-content');
-                    if (content) {
-                        gsap.to(content, {
-                            z: 40,
-                            rotateX: degX,
-                            rotateY: degY,
-                            transformPerspective: 1200,
-                            duration: 0.3,
-                            ease: 'power1.out'
-                        });
-                    }
+                    const x = (e.clientX - rect.left) / rect.width - 0.5;
+                    const y = (e.clientY - rect.top) / rect.height - 0.5;
+                    this.style.transform = `perspective(1100px) rotateX(${y * -5}deg) rotateY(${x * 5}deg)`;
                 });
-
                 card.addEventListener('mouseleave', function() {
-                    gsap.to(this, { rotateX: 0, rotateY: 0, duration: 0.5, ease: 'elastic.out(1, 0.5)' });
-                    const content = this.querySelector('.card-content');
-                    if (content) {
-                        gsap.to(content, { z: 0, rotateX: 0, rotateY: 0, duration: 0.5, ease: 'elastic.out(1, 0.5)' });
-                    }
+                    this.style.transform = 'perspective(1100px) rotateX(0deg) rotateY(0deg)';
                 });
             });
         }
 
-        // ========================================
-        // Barba.js — Horizontal Slice Transition
-        // ========================================
-        barba.init({
-            preventRunning: true,
-            transitions: [{
-                name: 'slice-transition',
-
-                async leave(data) {
-                    const done = this.async();
-                    const slices = document.querySelectorAll('.transition-overlay .slice');
-                    const card = document.getElementById('scalingCard');
-
-                    // 1. Scale the card down slightly
-                    gsap.to(card, {
-                        scale: 0.92,
-                        borderRadius: '20px',
-                        duration: 0.5,
-                        ease: EASE_IN_OUT
-                    });
-
-                    // 2. Slices sweep in from left to right (staggered)
-                    gsap.fromTo(slices,
-                        { scaleX: 0, transformOrigin: 'left center' },
-                        {
-                            scaleX: 1,
-                            duration: 0.45,
-                            stagger: 0.06,
-                            ease: EASE_IN_OUT,
-                            onComplete: done
-                        }
-                    );
-                },
-
-                enter(data) {
-                    const slices = document.querySelectorAll('.transition-overlay .slice');
-                    const card = document.getElementById('scalingCard');
-
-                    // Update active nav
-                    document.querySelectorAll('.nav-links a').forEach(a => {
-                        a.classList.remove('active');
-                        const href = a.getAttribute('href');
-                        const current = '/' + window.location.pathname.replace(/^\/|\/$/g, '');
-                        if (href === current || (href === '/' && current === '/')) {
-                            a.classList.add('active');
-                        }
-                    });
-
-                    // Scroll to top
-                    card.scrollTo(0, 0);
-
-                    // 3. Slices sweep out to the right
-                    gsap.fromTo(slices,
-                        { scaleX: 1, transformOrigin: 'right center' },
-                        {
-                            scaleX: 0,
-                            duration: 0.45,
-                            stagger: 0.06,
-                            ease: EASE_IN_OUT,
-                            delay: 0.1
-                        }
-                    );
-
-                    // 4. Scale card back up
-                    gsap.to(card, {
-                        scale: 1,
-                        borderRadius: '0px',
-                        duration: 0.7,
-                        ease: 'power3.out',
-                        delay: 0.15
-                    });
-
-                    // 5. Reveal new content
-                    setTimeout(() => {
-                        revealContent();
-                        initParallax();
-                    }, 200);
-                }
-            }]
+        window.addEventListener('DOMContentLoaded', () => {
+            initParallax();
         });
-
     })();
     </script>
-
 </body>
 </html>

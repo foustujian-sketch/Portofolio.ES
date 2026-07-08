@@ -50,7 +50,7 @@
                                 @endif
 
                                 <a href="{{ $project['html_url'] }}" target="_blank" class="btn-ghost" style="padding: 0.4rem 1rem; font-size: 0.8rem;">
-                                    View →
+                                    View
                                 </a>
                             </div>
                         </div>

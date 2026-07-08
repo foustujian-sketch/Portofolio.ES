@@ -1,1 +1,1 @@
-//
+import './avatar3d';
