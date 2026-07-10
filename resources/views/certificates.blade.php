@@ -1,13 +1,15 @@
 @extends('layouts.app')
 
+@section('title', 'Credentials - Abdurrahman Al Farisy')
+
 @section('content')
 
-    <section class="reveal" style="margin-bottom: 3rem;">
+    <section class="page-header reveal">
         <h1 class="heading-xl">
             <span class="heading-gradient">Credentials</span>
         </h1>
-        <p class="text-muted mt-2" style="max-width: 500px;">
-            Verified certifications and institutional achievements.
+        <p class="text-muted">
+            Verified certifications, committee work, and institutional achievements collected in one place.
         </p>
     </section>
 
@@ -19,7 +21,7 @@
                     <h3 style="color: #fff; font-weight: 600; font-size: 1.1rem;">INFORSA Committee</h3>
                     <span class="pill">Certificate</span>
                 </div>
-                <div style="border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.06);">
+                <div class="certificate-frame">
                     <img src="/images/certs/cert-inforsa.png" alt="INFORSA Certificate" style="width: 100%; height: auto; display: block;">
                 </div>
             </div>
@@ -31,7 +33,7 @@
                     <h3 style="color: #fff; font-weight: 600; font-size: 1.1rem;">Professional Achievement</h3>
                     <span class="pill">Certificate</span>
                 </div>
-                <div style="border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.06);">
+                <div class="certificate-frame">
                     <img src="/images/certs/download.png" alt="Certificate" style="width: 100%; height: auto; display: block;">
                 </div>
             </div>

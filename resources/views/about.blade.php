@@ -1,8 +1,11 @@
 @extends('layouts.app')
 
+@section('title', 'Abdurrahman Al Farisy - Backend Developer')
+
 @section('content')
 
-    <section class="hero">
+    <section id="profile" class="page-section profile-section" data-nav-section="profile">
+    <div class="hero">
         <div class="reveal">
             <span class="eyebrow">Samarinda based backend developer</span>
             <h1 class="heading-xl">
@@ -44,12 +47,30 @@
 
         <div class="avatar-3d-container reveal" id="avatar-3d-canvas-container" aria-label="Interactive 3D avatar">
             <canvas id="avatar-canvas"></canvas>
-            <div class="avatar-3d-fallback">
-                <img src="/images/avatar.png" alt="Abdurrahman Al Farisy">
-                <span class="font-mono text-xs">Loading 3D avatar...</span>
+            <div class="avatar-3d-fallback" role="status" aria-live="polite">
+                <div class="avatar-loader" aria-hidden="true">
+                    <span class="loader-orbit loader-orbit-outer"></span>
+                    <span class="loader-orbit loader-orbit-inner"></span>
+                    <span class="loader-core">AF</span>
+                </div>
+                <div class="loader-meta">
+                    <span class="loader-title">Loading 3D scene</span>
+                    <span class="font-mono text-xs" data-avatar-loading-text>Preparing</span>
+                </div>
+                <div class="loader-progress" aria-hidden="true">
+                    <span data-avatar-loading-progress></span>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+
+    <div class="section-intro reveal">
+        <div>
+            <span class="section-kicker font-mono">What I work on</span>
+            <h2 class="heading-md mt-1">Systems built to stay understandable.</h2>
+        </div>
+        <p class="text-muted text-sm">From database structure to the interface consuming it.</p>
+    </div>
 
     <div class="grid-2">
         <div class="inner-card reveal">
@@ -125,5 +146,9 @@
             </div>
         </div>
     </div>
+    </section>
+
+    @include('partials.projects', ['projects' => $projects ?? []])
+    @include('partials.credentials')
 
 @endsection

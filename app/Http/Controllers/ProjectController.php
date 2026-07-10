@@ -25,6 +25,6 @@ class ProjectController extends Controller
             return [];
         });
 
-        return view('projects', ['projects' => $projects]);
+        return view('about', ['projects' => $projects]);
     }
 }

@@ -1,13 +1,15 @@
 @extends('layouts.app')
 
+@section('title', 'Projects - Abdurrahman Al Farisy')
+
 @section('content')
 
-    <section class="reveal" style="margin-bottom: 3rem;">
+    <section class="page-header reveal">
         <h1 class="heading-xl">
             <span class="heading-gradient">Projects</span>
         </h1>
-        <p class="text-muted mt-2" style="max-width: 500px;">
-            Open-source work and recent deployments pulled from GitHub.
+        <p class="text-muted">
+            A live selection of open-source experiments, Laravel systems, and application work pulled from GitHub.
         </p>
     </section>
 
@@ -20,7 +22,7 @@
             </div>
         @else
             @foreach($projects as $project)
-                <div class="inner-card reveal" style="display: flex; flex-direction: column;">
+                <article class="inner-card project-card reveal" style="display: flex; flex-direction: column;">
                     <div class="card-content" style="flex: 1; display: flex; flex-direction: column;">
 
                         <div style="margin-bottom: 1rem;">
@@ -49,14 +51,14 @@
                                     <span></span>
                                 @endif
 
-                                <a href="{{ $project['html_url'] }}" target="_blank" class="btn-ghost" style="padding: 0.4rem 1rem; font-size: 0.8rem;">
-                                    View
+                                <a href="{{ $project['html_url'] }}" target="_blank" rel="noreferrer" class="btn-ghost project-link" style="padding: 0.4rem 1rem; font-size: 0.8rem;">
+                                    View project <span aria-hidden="true">&nearr;</span>
                                 </a>
                             </div>
                         </div>
 
                     </div>
-                </div>
+                </article>
             @endforeach
         @endif
     </div>

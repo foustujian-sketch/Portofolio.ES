@@ -3,12 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectController;
 
-Route::get('/', function () {
-    return view('about');
-});
+Route::get('/', [ProjectController::class, 'index'])->name('home');
 
-Route::get('/projects', [ProjectController::class, 'index']);
-
-Route::get('/certificates', function () {
-    return view('certificates');
-});
+Route::redirect('/projects', '/#projects', 301);
+Route::redirect('/certificates', '/#credentials', 301);
